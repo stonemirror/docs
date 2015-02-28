@@ -86,39 +86,38 @@ There are different ways to set up virtual hosts; however, we recommend the meth
     {: .file-excerpt }
     /etc/httpd/conf.d/vhost.conf
     :   ~~~ conf
-        NameVirtualHost *:80
-        
+
         <VirtualHost *:80>
             ServerAdmin webmaster@example.com
             ServerName example.com
             ServerAlias www.example.com
-            DocumentRoot /srv/www/example.com/public_html/
-            ErrorLog /srv/www/example.com/logs/error.log
-            CustomLog /srv/www/example.com/logs/access.log combined
-        </VirtualHost>
+            DocumentRoot /var/www/html/example.com/public_html/
++           ErrorLog /var/www/html/example.com/logs/error.log
++           CustomLog /var/www/html/example.com/logs/access.log combined
++ </VirtualHost>
 
         <VirtualHost *:80>
             ServerAdmin webmaster@example.org
             ServerName example.org
             ServerAlias www.example.org
-            DocumentRoot /srv/www/example.org/public_html/
-            ErrorLog /srv/www/example.org/logs/error.log
-            CustomLog /srv/www/example.org/logs/access.log combined
+            DocumentRoot /var/www/html/example.org/public_html/
+            ErrorLog /var/www/html/example.org/logs/error.log
+            CustomLog /var/www/html/example.org/logs/access.log combined
         </VirtualHost>
         ~~~
 
     Notes regarding this example configuration:
 
-    -   All of the files for the sites that you host will be located in directories that exist underneath `/srv/www`. You can symbolically link these directories into other locations if you need them to exist elsewhere.
+    -   All of the files for the sites that you host will be located in directories that exist underneath `/var/www/html`. You can symbolically link these directories into other locations if you need them to exist elsewhere.
     -   `ErrorLog` and `CustomLog` entries are suggested for more fine-grained logging, but are not required. If they are defined (as shown above), the `logs` directories must be created before you restart Apache.
 
 2.  Before you can use the above configuration you’ll need to create the specified directories. For the above configuration, you can do this by issuing the following commands:
 
-        sudo mkdir -p /srv/www/example.com/public_html
-        sudo mkdir /srv/www/example.com/logs
+        sudo mkdir -p /var/www/html/example.com/public_html
+        sudo mkdir /var/www/html/example.com/logs
 
-        sudo mkdir -p /srv/www/example.org/public_html
-        sudo mkdir /srv/www/example.org/logs
+        sudo mkdir -p /var/www/html/example.org/public_html
+        sudo mkdir /var/www/html/example.org/logs
 
 3.  After you’ve set up your virtual hosts, you can issue the following commands to enable Apache to start on boot and run for the first time:
 
